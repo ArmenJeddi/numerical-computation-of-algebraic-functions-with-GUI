@@ -1,5 +1,4 @@
 function [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn)
-% f
 myVarsSymbol = @(i) ['a',num2str(i),'a'];
 myVarsCounter=1;
 stepCounter = 1;
@@ -15,15 +14,10 @@ inneRrelErrors = cell(0, 1);
 inneAbsErrors = cell(0, 1);
 innerVals = cell(0, 1);
 tempf = f;
-% size(startIndex, 1)
 if(size(startIndex, 1)>0)
 for i = size(startIndex, 1):-1:1
-%     startIndex
     newf = tempf(startIndex(i): endIndex(i));
-%     tempf
     tempf=[tempf(1:startIndex(i) - 1), myVarsSymbol(myVarsCounter), tempf(endIndex(i)+1:size(tempf, 2))];
-%     disp('in');
-%     tempf
     newf = newf(2:size(newf, 2)-1);
 %     TODO update var list
     [tmpinnerSteps, tmpinneRrelErrors, tmpinneAbsErrors, tmpinnerVals] = calcErrorsInStep(newf, vars, varsValues,absuluteIn);
@@ -31,7 +25,6 @@ for i = size(startIndex, 1):-1:1
     inneRrelErrors = [tmpinneRrelErrors;inneRrelErrors];
     inneAbsErrors =[tmpinneAbsErrors;inneAbsErrors];
     innerVals =[tmpinnerVals;innerVals];
-%     tempf
     myVarsArrPars(myVarsCounter, 1) = startIndex(i);
     myVarsArrPars(myVarsCounter, 2) = endIndex(i);
     myVarsArrPars(myVarsCounter, 3) = tmpinneRrelErrors{ size(tmpinneRrelErrors, 1),1};
@@ -42,36 +35,11 @@ for i = size(startIndex, 1):-1:1
 end
 end
 % TODO nasted power and only number and not parameter
-% disp('1o1');
-% disp(f);
 mySteps = cell(0, 1);
 myrelError = cell(0, 1);
 myAbsError = cell(0, 1);
 myval = cell(0, 1);
 
-% power
-% while(size(regexp(tempf,'(([a-z])(\^)(\d+))|((a\d+a)(\^)(\d+))', 'tokens'))~= 0)
-%     tmp = regexp(tempf,'(([a-z])(\^)(\d+))|((a\d+a)(\^)(\d+))', 'tokens');
-%     [start, endd] = regexp(tempf,'(([a-z])(\^)(\d+))|((a\d+a)(\^)(\d+))');
-%     tmp=tmp{1}{:};
-%     tmpPars = regexp(tmp, '(\w+)(\^)(\d+)', 'tokens');
-%     tmpBase = tmpPars{1}{1};
-%     tmpExp = tmpPars{1}{3};
-%     [tmpval, tmpRelError, tmpAbsError ] = findVarPar(tmpBase, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn);
-%     [tempRelError, tempAbsError, tempAns] = calcExp(tmpRelError, tmpAbsError, tmpval, 0, 0, str2num(tmpExp));
-%     tempf = [tempf(1:start(1)-1), myVarsSymbol(myVarsCounter), tempf(endd(1)+1:size(tempf, 2))];
-%     myVarsArrPars(myVarsCounter, 1) = start;
-%     myVarsArrPars(myVarsCounter, 2) = endd;
-%     myVarsArrPars(myVarsCounter, 3) = tempRelError;
-%     myVarsArrPars(myVarsCounter, 4) = tempAbsError;
-%     myVarsArrPars(myVarsCounter, 5) = tempAns;
-%     myVarsCounter = myVarsCounter+1;
-%     tmp = [num2str(tmpval), '^', tmpExp];
-%     mySteps = [mySteps; tmp]; 
-% 	myrelError = [myrelError;tempRelError];
-%     myAbsError = [myAbsError;tempAbsError];
-%     myval = [myval;tempAns];
-% end
 % poer
 while(size(regexp(tempf,'(\w+)(\^)(\w+)', 'tokens'))~= 0)
     tmp = regexp(tempf,'(\w+)(\^)(\w+)', 'tokens');
@@ -113,7 +81,8 @@ while(size(regexp(tempf,'(\w+)(\^)(\w+)', 'tokens'))~= 0)
     myAbsError = [myAbsError;tempAbsError];
     myval = [myval;tempAns];
 end
-% tempf
+
+
 % * \
 while(size(regexp(tempf,'(\w+)(\*|/)(\w+)', 'tokens'))~= 0)
     tmp = regexp(tempf,'(\w+)(\*|/)(\w+)', 'tokens');
@@ -162,7 +131,7 @@ while(size(regexp(tempf,'(\w+)(\*|/)(\w+)', 'tokens'))~= 0)
 end
 
 % + -
-% f
+
 while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
     tmp = regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens');
     [start, endd] = regexp(tempf,'(\w+)(\+|-)(\w+)');
@@ -170,8 +139,6 @@ while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
     tmpfirst = tmp{1};
     op = tmp{2};
     tmpsec = tmp{3};
-%     tempf
-%     myVarsArrPars
     if(size(str2num(tmpfirst))== 0)
         [tmpval1, tmpRelError1, tmpAbsError1] = findVarPar(tmpfirst, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn);
     else
@@ -195,8 +162,6 @@ while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
     tempf = [tempf(1:start(1)-1), myVarsSymbol(myVarsCounter), tempf(endd(1)+1:size(tempf, 2))];
     myVarsArrPars(myVarsCounter, 1) = start(1);
     myVarsArrPars(myVarsCounter, 2) = endd(1);
-% 	tempf
-%     tempRelError
     myVarsArrPars(myVarsCounter, 3) = tempRelError;
     myVarsArrPars(myVarsCounter, 4) = tempAbsError;
     myVarsArrPars(myVarsCounter, 5) = tempAns;
