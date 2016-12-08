@@ -24,7 +24,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 15:34:15
+% Last Modified by GUIDE v2.5 08-Dec-2016 15:56:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,12 +54,14 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to main (see VARARGIN)
 
+global global_struct; 
+global_struct.FPD = 5 ;
+
 % Choose default command line output for main
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
-
 % UIWAIT makes main wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -76,54 +78,6 @@ varargout{1} = handles.output;
 
 
 
-% --- Executes on button press in Chapter1.
-function Chapter1_Callback(hObject, eventdata, handles)
-% hObject    handle to Chapter1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-get(handles.input_Area,'String');
-
-
-% --- Executes on button press in Chapter3.
-function Chapter3_Callback(hObject, eventdata, handles)
-% hObject    handle to Chapter3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-FPD = str2double(get(handles.input_Area,'String'));
-
-% --- Executes on button press in Chapter2.
-function Chapter2_Callback(hObject, eventdata, handles)
-% hObject    handle to Chapter2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-FPD = str2double(get(handles.input_Area,'String'));
-
-
-% --- Executes on button press in Chapter6.
-function Chapter6_Callback(hObject, eventdata, handles)
-% hObject    handle to Chapter6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-FPD = str2double(get(handles.input_Area,'String'));
-
-
-% --- Executes on button press in Chapter5.
-function Chapter5_Callback(hObject, eventdata, handles)
-% hObject    handle to Chapter5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-FPD = str2double(get(handles.input_Area,'String'));
-
-
-% --- Executes on button press in Chapter4.
-function Chapter4_Callback(hObject, eventdata, handles)
-% hObject    handle to Chapter4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-FPD = str2double(get(handles.input_Area,'String'));
-
-
-
 function input_Area_Callback(hObject, eventdata, handles)
 % hObject    handle to input_Area (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -131,6 +85,7 @@ function input_Area_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of input_Area as text
 %        str2double(get(hObject,'String')) returns contents of input_Area as a double
+global global_struct; 
 input = str2double(get(hObject,'String'));
 if isnan(input) || ~isreal(input)
     set(handles.Chapter1,'Enable','off');
@@ -156,13 +111,81 @@ else
     else
         set(handles.Chapter1,'Enable','on');
         set(handles.Chapter2,'Enable','on');
-        set(handles.Chapter3,'Enable','on');
+        set(handles.Chapter3,'Enable','on'); 
         set(handles.Chapter4,'Enable','on');
         set(handles.Chapter5,'Enable','on');
         set(handles.Chapter6,'Enable','on');
+        global_struct.FPD = input ; 
+        
     end
 
 end
+
+
+
+% --- Executes on button press in Chapter1.
+function Chapter1_Callback(hObject, eventdata, handles)
+% hObject    handle to Chapter1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA) 
+global global_struct;
+get(handles.input_Area,'String');
+handles.newVar1 = global_struct.FPD ;
+handles.thisWin = gcf ;
+set(gcf , 'Visible' , 'off') ;
+untitled(handles)
+
+
+% --- Executes on button press in Chapter3.
+function Chapter3_Callback(hObject, eventdata, handles)
+% hObject    handle to Chapter3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global global_struct;
+get(handles.input_Area,'String');
+handles.newVar1 = global_struct.FPD ;
+handles.thisWin = gcf ;
+set(gcf , 'Visible' , 'off') ;
+ch3(handles)
+
+
+% --- Executes on button press in Chapter2.
+function Chapter2_Callback(hObject, eventdata, handles)
+% hObject    handle to Chapter2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global global_struct;
+get(handles.input_Area,'String');
+handles.newVar1 = global_struct.FPD ;
+handles.thisWin = gcf ;
+set(gcf , 'Visible' , 'off') ;
+ch2menu(handles)
+
+
+% --- Executes on button press in Chapter6.
+function Chapter6_Callback(hObject, eventdata, handles)
+% hObject    handle to Chapter6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+get(handles.input_Area,'String');
+
+
+% --- Executes on button press in Chapter5.
+function Chapter5_Callback(hObject, eventdata, handles)
+% hObject    handle to Chapter5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+get(handles.input_Area,'String');
+
+
+% --- Executes on button press in Chapter4.
+function Chapter4_Callback(hObject, eventdata, handles)
+% hObject    handle to Chapter4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+get(handles.input_Area,'String');
+
+
 
 % --- Executes during object creation, after setting all properties.
 function input_Area_CreateFcn(hObject, eventdata, handles)
@@ -189,3 +212,13 @@ switch user_response
     case 'Yes'
         close(gcf) ;
 end
+
+
+% --- Executes during object creation, after setting all properties.
+function axes3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+axes(hObject) 
+imshow('simpson1.png') 
+% Hint: place code in OpeningFcn to populate axes3
