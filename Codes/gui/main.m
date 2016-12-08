@@ -54,9 +54,10 @@ function main_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to main (see VARARGIN)
 
-global global_struct; 
+global global_struct;
 global_struct.FPD = 5 ;
 
+addpath(genpath('Codes'));
 % Choose default command line output for main
 handles.output = hObject;
 
@@ -133,7 +134,7 @@ get(handles.input_Area,'String');
 handles.newVar1 = global_struct.FPD ;
 handles.thisWin = gcf ;
 set(gcf , 'Visible' , 'off') ;
-untitled(handles)
+untitled(handles);
 
 
 % --- Executes on button press in Chapter3.
@@ -146,7 +147,7 @@ get(handles.input_Area,'String');
 handles.newVar1 = global_struct.FPD ;
 handles.thisWin = gcf ;
 set(gcf , 'Visible' , 'off') ;
-ch3(handles)
+ch3(handles);
 
 
 % --- Executes on button press in Chapter2.

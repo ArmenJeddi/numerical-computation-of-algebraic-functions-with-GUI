@@ -30,12 +30,19 @@ for i=1:iter,
         e_str, ') = (', num2str(f_s), ')*(', num2str(f_e), ...
         ') = ', num2str(f_s*f_e), ' < 0'];
     steps{5*i-3} = substep;
-   
+    
     steps{5*i-2} = 'Bolzano''s theorem holds thus:';
     
     substep = ['x', num2str(i+1), ' = (', s_str, '+', e_str, ...
         ')/2 = ', num2str(mid)];
     steps{5*i-1} = substep;
+    
+    % terminate if f(mid) is zero
+    if eval(subs(func_str, mid)) == 0,
+        substep = ['Exact root found! f(', num2str(mid), ') = 0'];
+        steps{5*i} = substep;
+        break
+    end
     
     steps{5*i} = '';
     

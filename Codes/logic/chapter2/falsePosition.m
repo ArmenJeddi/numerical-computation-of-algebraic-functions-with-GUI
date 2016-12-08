@@ -38,6 +38,13 @@ for i=1:iter,
         s_str, ')/(f(', e_str, ')-', 'f(', s_str, '))', ' = ', num2str(next)];
     steps{5*i-1} = substep;
     
+    % terminate if f(next) is zero
+    if eval(subs(func_str, next)) == 0,
+        substep = ['Exact root found! f(', num2str(next), ') = 0'];
+        steps{5*i} = substep;
+        break
+    end
+    
     steps{5*i} = '';
     
     % finding the next interval

@@ -31,6 +31,13 @@ for i=1:iter,
         ')-f(', s_str, ')) = ', num2str(next)];
     steps{3*i-1} = substep;
     
+    % terminate if f(next) is zero
+    if eval(subs(func_str, next)) == 0,
+        substep = ['Exact root found! f(', num2str(next), ') = 0'];
+        steps{3*i} = substep;
+        break
+    end
+    
     steps{3*i} = '';
     
     s = e;

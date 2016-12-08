@@ -25,6 +25,13 @@ for i=1:iter,
         ')/f''(', x_str, ') = ', num2str(tmp_x)];
     steps{3*i-1} = substep;
     
+    % terminate if f(tmp_x) is zero
+    if eval(subs(func_str, tmp_x)) == 0,
+        substep = ['Exact root found! f(', num2str(tmp_x), ') = 0'];
+        steps{5*i} = substep;
+        break
+    end
+    
     steps{3*i} = '';
     
     x_str = ['x', num2str(i)];

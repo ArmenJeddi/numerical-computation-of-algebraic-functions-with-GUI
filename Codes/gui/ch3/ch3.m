@@ -22,7 +22,7 @@ function varargout = ch3(varargin)
 
 % Edit the above text to modify the response to help ch3
 
-% Last Modified by GUIDE v2.5 08-Dec-2016 17:47:29
+% Last Modified by GUIDE v2.5 08-Dec-2016 19:04:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,8 +60,8 @@ handles.action = 'interpolate' ;
 handles.numofpoints = 2 ;
 handles.act_type = 1 ;
 
-addpath('interpolation');
-addpath('curvefitting') ;
+addpath(genpath('Codes/logic/chapter3/interpolation'));
+addpath(genpath('Codes/logic/chapter3/curvefitting'));
 
 % Update handles structure
 guidata(hObject, handles);
