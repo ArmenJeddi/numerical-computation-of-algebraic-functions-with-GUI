@@ -22,7 +22,7 @@ function varargout = untitled(varargin)
 
 % Edit the above text to modify the response to help untitled
 
-% Last Modified by GUIDE v2.5 08-Dec-2016 01:32:32
+% Last Modified by GUIDE v2.5 17-Dec-2016 06:51:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -100,47 +100,58 @@ end
 function pushbutton1_Callback(hObject, eventdata, handles)
 
   f = get(handles.funcText, 'String');
-  vars = ['a';'b';'c';'d';'e';'f'];
-  varsValues = ones(6, 1);
+  vars = [];
+  varsValues = ones(0, 1);
+  absuluteIn = ones(0, 1);
+  parametricVars = ['b'];
   try
-  varsValues(1) = str2num(get(handles.aValText, 'String'));
-  absuluteIn(1) = str2num(get(handles.aErrText, 'String'));
+    vars = [vars;'a'];
+    varsValues = [varsValues;str2num(get(handles.aValText, 'String'))];
+%     varsValues(1) = str2num(get(handles.aValText, 'String'));
+    absuluteIn = [absuluteIn;str2num(get(handles.aErrText, 'String'))];
+%     absuluteIn(1) = str2num(get(handles.aErrText, 'String'));
+  catch
+      
+  end
+  
+  try
+      vars = [vars;'b'];
+      varsValues = [varsValues;str2num(get(handles.bValText, 'String'))];
+      absuluteIn = [absuluteIn;str2num(get(handles.bErrText, 'String'))];
   catch
   end
   
   try
-  varsValues(2) = str2num(get(handles.bValText, 'String'));
-  absuluteIn(2) = str2num(get(handles.bErrText, 'String'));
+      vars = [vars;'c'];
+      varsValues = [varsValues;str2num(get(handles.cValText, 'String'))];
+      absuluteIn = [absuluteIn;str2num(get(handles.cErrText, 'String'))];
   catch
   end
   
   try
-  varsValues(3) = str2num(get(handles.cValText, 'String'));
-  absuluteIn(3) = str2num(get(handles.cErrText, 'String'));
+      vars = [vars;'d'];
+      varsValues = [varsValues;str2num(get(handles.dValText, 'String'))];
+      absuluteIn = [absuluteIn;str2num(get(handles.dErrText, 'String'))];
   catch
   end
   
   try
-  varsValues(4) = str2num(get(handles.dValText, 'String'));
-  absuluteIn(4) = str2num(get(handles.dErrText, 'String'));
+      vars = [vars;'e'];
+      varsValues = [varsValues;str2num(get(handles.eValText, 'String'))];
+      absuluteIn = [absuluteIn;str2num(get(handles.eErrText, 'String'))];
   catch
   end
   
   try
-  varsValues(5) = str2num(get(handles.eValText, 'String'));
-  absuluteIn(5) = str2num(get(handles.eErrText, 'String'));
+      vars = [vars;'f'];
+      varsValues = [varsValues;str2num(get(handles.fValText, 'String'))];
+      absuluteIn = [absuluteIn;str2num(get(handles.fErrText, 'String'))];
   catch
   end
+  [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars);
   
-  try
-  varsValues(6) = str2num(get(handles.fValText, 'String'));
-  absuluteIn(6) = str2num(get(handles.fErrText, 'String'));
-  catch
-  end
-  [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn);
-  
-  
- set(handles.Answer, 'String', val(size(val, 1)));
+%  class(num(val(size(val, 1))))
+ set(handles.Answer, 'String', char((val(size(val, 1)))));
   
 h = uimulticollist (gcf);
 set(h, 'Position', [100 200 500 100]);
@@ -148,14 +159,18 @@ set(h, 'Position', [100 200 500 100]);
 uimulticollist(h, 'addCol', {'step'}, 1, 'GREEN');
 uimulticollist(h, 'addCol', {'Abs Error'}, 2, 'RED');
 uimulticollist(h, 'addCol', {'Rel Error'}, 2, 'BLUE');
-uimulticollist(h, 'changeRow', {'step', 'Abs Error', 'Rel Error', 'val'}, 1 );
-num2str(relError{1})
-num2str(AbsError{1})
-num2str(val{1})
-% str2num(AbsError(1))
+uimulticollist(h, 'changeRow', {'step', 'Rel Error', 'Abs Error', 'val'}, 1 );
+% num2str(double(relError(1)))
+% num2str(AbsError{1})
+% num2str(val{1})
 for i = 1:size(steps, 1)
-    uimulticollist(h, 'addRow', {steps{i}, num2str(relError{i}), num2str(AbsError{i}), num2str(val{i})}, 2, 'RED');
+    if(isa(AbsError(i), 'double'))
+        uimulticollist(h, 'addRow', {steps{i}, num2str(double(relError(i))), num2str(double(AbsError(i))), num2str(double(val(i)))}, 2, 'RED');
+    else
+        uimulticollist(h, 'addRow', {steps{i}, char(relError(i)), char(AbsError(i)), char(val(i))}, 2, 'RED');
+    end
 end
+
 % uimulticollist(h, 'addRow', {'1', 'qq', 'rrr'}, 2);
 
 
@@ -204,13 +219,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in togglebutton1.
-function togglebutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton1 (see GCBO)
+% --- Executes on button press in d_par_button.
+function d_par_button_Callback(hObject, eventdata, handles)
+% hObject    handle to d_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of togglebutton1
+% Hint: get(hObject,'Value') returns toggle state of d_par_button
 
 
 
@@ -259,13 +274,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in togglebutton2.
-function togglebutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton2 (see GCBO)
+% --- Executes on button press in b_par_button.
+function b_par_button_Callback(hObject, eventdata, handles)
+% hObject    handle to b_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of togglebutton2
+% Hint: get(hObject,'Value') returns toggle state of b_par_button
 
 
 
@@ -315,13 +330,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in togglebutton3.
-function togglebutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton3 (see GCBO)
+% --- Executes on button press in f_par_button.
+function f_par_button_Callback(hObject, eventdata, handles)
+% hObject    handle to f_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of togglebutton3
+% Hint: get(hObject,'Value') returns toggle state of f_par_button
 
 
 
@@ -370,13 +385,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in togglebutton4.
-function togglebutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton4 (see GCBO)
+% --- Executes on button press in e_par_button.
+function e_par_button_Callback(hObject, eventdata, handles)
+% hObject    handle to e_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of togglebutton4
+% Hint: get(hObject,'Value') returns toggle state of e_par_button
 
 
 
@@ -425,22 +440,22 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in togglebutton5.
-function togglebutton5_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton5 (see GCBO)
+% --- Executes on button press in c_par_button.
+function c_par_button_Callback(hObject, eventdata, handles)
+% hObject    handle to c_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of togglebutton5
+% Hint: get(hObject,'Value') returns toggle state of c_par_button
 
 
-% --- Executes on button press in togglebutton6.
-function togglebutton6_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton6 (see GCBO)
+% --- Executes on button press in a_par_button.
+function a_par_button_Callback(hObject, eventdata, handles)
+% hObject    handle to a_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of togglebutton6
+% Hint: get(hObject,'Value') returns toggle state of a_par_button
 
 
 

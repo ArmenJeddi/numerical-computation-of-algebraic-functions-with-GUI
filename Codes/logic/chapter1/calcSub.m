@@ -1,5 +1,7 @@
 function [fRelError, fAbsError, fAns] = calcSub(RelError1, AbsError1, Val1, RelError2, AbsError2, Val2)
-fAbsError = AbsError1 + AbsError2;
-fAns = Val1-Val2;
-fRelError = abs(fAbsError/fAns);
+syms a b c d e f
+syms e(a) e(b) e(c) e(d) e(e) e(f)
+fAbsError = subs(AbsError1 + AbsError2);
+fAns = subs(Val1-Val2);
+fRelError = subs(abs(fAbsError/fAns));
 end
