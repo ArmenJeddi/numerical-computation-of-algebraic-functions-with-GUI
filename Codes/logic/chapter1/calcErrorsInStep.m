@@ -1,4 +1,5 @@
 function [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars, ischop, FPD)
+warning off;
 digits(FPD);
 ischop = 0;
 myVarsSymbol = @(i) ['a',num2str(i),'a'];

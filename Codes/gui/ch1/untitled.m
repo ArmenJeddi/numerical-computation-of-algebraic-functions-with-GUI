@@ -1,5 +1,4 @@
-% close(gcf);
-% set(handles.parent, 'Visible', 'on');
+
 function varargout = untitled(varargin)
 % UNTITLED MATLAB code for untitled.fig
 %      UNTITLED, by itself, creates a new UNTITLED or raises the existing
@@ -24,7 +23,7 @@ function varargout = untitled(varargin)
 
 % Edit the above text to modify the response to help untitled
 
-% Last Modified by GUIDE v2.5 17-Dec-2016 06:51:29
+% Last Modified by GUIDE v2.5 18-Dec-2016 17:05:44
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -108,47 +107,57 @@ function pushbutton1_Callback(hObject, eventdata, handles)
   absuluteIn = ones(0, 1);
   parametricVars = ['b'];
   try
+      if (get(handles.a_par_button ,'Value') == 0)
     vars = [vars;'a'];
     varsValues = [varsValues;str2num(get(handles.aValText, 'String'))];
-%     varsValues(1) = str2num(get(handles.aValText, 'String'));
     absuluteIn = [absuluteIn;str2num(get(handles.aErrText, 'String'))];
-%     absuluteIn(1) = str2num(get(handles.aErrText, 'String'));
+      end
   catch
       
   end
   
   try
+      if (get(handles.b_par_button ,'Value') == 0)
       vars = [vars;'b'];
       varsValues = [varsValues;str2num(get(handles.bValText, 'String'))];
       absuluteIn = [absuluteIn;str2num(get(handles.bErrText, 'String'))];
+      end
   catch
   end
   
   try
+      if (get(handles.c_par_button ,'Value') == 0)
       vars = [vars;'c'];
       varsValues = [varsValues;str2num(get(handles.cValText, 'String'))];
       absuluteIn = [absuluteIn;str2num(get(handles.cErrText, 'String'))];
+      end
   catch
   end
   
   try
+      if (get(handles.d_par_button ,'Value') == 0)
       vars = [vars;'d'];
       varsValues = [varsValues;str2num(get(handles.dValText, 'String'))];
       absuluteIn = [absuluteIn;str2num(get(handles.dErrText, 'String'))];
+      end
   catch
   end
   
   try
+      if (get(handles.e_par_button ,'Value') == 0)
       vars = [vars;'e'];
       varsValues = [varsValues;str2num(get(handles.eValText, 'String'))];
       absuluteIn = [absuluteIn;str2num(get(handles.eErrText, 'String'))];
+      end
   catch
   end
   
   try
+      if (get(handles.f_par_button ,'Value') == 0)
       vars = [vars;'f'];
       varsValues = [varsValues;str2num(get(handles.fValText, 'String'))];
       absuluteIn = [absuluteIn;str2num(get(handles.fErrText, 'String'))];
+      end
   catch
   end
   [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars, 0, handles.FPD);
@@ -156,7 +165,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  set(handles.Answer, 'String', char((val(size(val, 1)))));
   
 h = uimulticollist (gcf);
-set(h, 'Position', [100 200 500 100]);
+% ? ? w h
+set(h, 'Position', [240 70 500 200]);
+set(h, 'fontSize', 16);
 % rowItems = {'step', 'Abs Error', 'Rel Error', 'val'};
 uimulticollist(h, 'addCol', {'step'}, 1, 'GREEN');
 uimulticollist(h, 'addCol', {'Abs Error'}, 2, 'RED');
@@ -223,6 +234,14 @@ end
 
 % --- Executes on button press in d_par_button.
 function d_par_button_Callback(hObject, eventdata, handles)
+
+if (get(hObject,'Value') == 1)
+    set(handles.dValText, 'Enable', 'off');
+    set(handles.dErrText, 'Enable', 'off');
+else
+    set(handles.dValText, 'Enable', 'on');
+    set(handles.dErrText, 'Enable', 'on');
+end
 % hObject    handle to d_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -278,6 +297,14 @@ end
 
 % --- Executes on button press in b_par_button.
 function b_par_button_Callback(hObject, eventdata, handles)
+
+if (get(hObject,'Value') == 1)
+    set(handles.bValText, 'Enable', 'off');
+    set(handles.bErrText, 'Enable', 'off');
+else
+    set(handles.bValText, 'Enable', 'on');
+    set(handles.bErrText, 'Enable', 'on');
+end
 % hObject    handle to b_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -334,6 +361,13 @@ end
 
 % --- Executes on button press in f_par_button.
 function f_par_button_Callback(hObject, eventdata, handles)
+if (get(hObject,'Value') == 1)
+    set(handles.fValText, 'Enable', 'off');
+    set(handles.fErrText, 'Enable', 'off');
+else
+    set(handles.fValText, 'Enable', 'on');
+    set(handles.fErrText, 'Enable', 'on');
+end
 % hObject    handle to f_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -389,6 +423,14 @@ end
 
 % --- Executes on button press in e_par_button.
 function e_par_button_Callback(hObject, eventdata, handles)
+
+if (get(hObject,'Value') == 1)
+    set(handles.eValText, 'Enable', 'off');
+    set(handles.eErrText, 'Enable', 'off');
+else
+    set(handles.eValText, 'Enable', 'on');
+    set(handles.eErrText, 'Enable', 'on');
+end
 % hObject    handle to e_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -444,6 +486,14 @@ end
 
 % --- Executes on button press in c_par_button.
 function c_par_button_Callback(hObject, eventdata, handles)
+
+if (get(hObject,'Value') == 1)
+    set(handles.cValText, 'Enable', 'off');
+    set(handles.cErrText, 'Enable', 'off');
+else
+    set(handles.cValText, 'Enable', 'on');
+    set(handles.cErrText, 'Enable', 'on');
+end
 % hObject    handle to c_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -453,6 +503,14 @@ function c_par_button_Callback(hObject, eventdata, handles)
 
 % --- Executes on button press in a_par_button.
 function a_par_button_Callback(hObject, eventdata, handles)
+
+if (get(hObject,'Value') == 1)
+    set(handles.aValText, 'Enable', 'off');
+    set(handles.aErrText, 'Enable', 'off');
+else
+    set(handles.aValText, 'Enable', 'on');
+    set(handles.aErrText, 'Enable', 'on');
+end
 % hObject    handle to a_par_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -548,3 +606,21 @@ function aValText_KeyPressFcn(hObject, eventdata, handles)
 %	Character: character interpretation of the key(s) that was pressed
 %	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in back.
+function back_Callback(hObject, eventdata, handles)
+  close(gcf);
+  set(handles.parent, 'Visible', 'on');
+% hObject    handle to back (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in togglebutton7.
+function togglebutton7_Callback(hObject, eventdata, handles)
+% hObject    handle to togglebutton7 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of togglebutton7

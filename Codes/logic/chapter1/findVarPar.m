@@ -28,6 +28,7 @@ if(AbsError == -1)
     val=sym(name);
     AbsError = sym(['e(',name,')']);
     relError = sym(['e(',name,')/',name]);
+%     name
 end
 
 % if(ischop==1)
