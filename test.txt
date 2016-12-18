@@ -1,0 +1,208 @@
+diff --git a/Codes/gui/ch1/untitled.m b/Codes/gui/ch1/untitled.m
+index bf44df7..30f53e6 100644
+--- a/Codes/gui/ch1/untitled.m
++++ b/Codes/gui/ch1/untitled.m
+@@ -150,7 +150,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
+   end
+   [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars);
+   
+-%  class(num(val(size(val, 1))))
+  set(handles.Answer, 'String', char((val(size(val, 1)))));
+   
+ h = uimulticollist (gcf);
+diff --git a/Codes/logic/chapter1/calcErrorsInStep.m b/Codes/logic/chapter1/calcErrorsInStep.m
+index ff0e276..015decf 100644
+--- a/Codes/logic/chapter1/calcErrorsInStep.m
++++ b/Codes/logic/chapter1/calcErrorsInStep.m
+@@ -1,4 +1,6 @@
+ function [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars)
++FPD = 2;
++ischop = 0;
+ myVarsSymbol = @(i) ['a',num2str(i),'a'];
+ myVarsCounter=1;
+ stepCounter = 1;
+@@ -20,22 +22,11 @@ for i = size(startIndex, 1):-1:1
+     newf = tempf(startIndex(i): endIndex(i));
+     tempf=[tempf(1:startIndex(i) - 1), myVarsSymbol(myVarsCounter), tempf(endIndex(i)+1:size(tempf, 2))];
+     newf = newf(2:size(newf, 2)-1);
+-%     TODO update var list
+     [tmpinnerSteps, tmpinneRrelErrors, tmpinneAbsErrors, tmpinnerVals] = calcErrorsInStep(newf, vars, varsValues,absuluteIn, parametricVars);
+     innerSteps = [tmpinnerSteps;innerSteps];
+     inneRrelErrors = [tmpinneRrelErrors;inneRrelErrors];
+     inneAbsErrors =[tmpinneAbsErrors;inneAbsErrors];
+     innerVals =[tmpinnerVals;innerVals];
+-%     myVarsArrPars(myVarsCounter, 1) = startIndex(i);
+-%     myVarsArrPars(myVarsCounter, 2) = endIndex(i);
+-%     myVarsArrPars(myVarsCounter, 3) = tmpinneRrelErrors{ size(tmpinneRrelErrors, 1),1};
+-%     myVarsArrPars(myVarsCounter, 4) = tmpinneAbsErrors{ size(tmpinneAbsErrors, 1),1};
+-%     myVarsArrPars(myVarsCounter, 5) = tmpinnerVals{ size(tmpinnerVals, 1),1};
+-% startIndex(i) 
+-% endIndex(i)
+-% tmpinneRrelErrors(size(tmpinneRrelErrors, 1),1)
+-% tmpinneAbsErrors{ size(tmpinneAbsErrors, 1),1}
+-% tmpinnerVals{ size(tmpinnerVals, 1),1}
+     myVarsArrPars = [myVarsArrPars;startIndex(i) ,endIndex(i),tmpinneRrelErrors( size(tmpinneRrelErrors, 1),1),tmpinneAbsErrors( size(tmpinneAbsErrors, 1),1),tmpinnerVals( size(tmpinnerVals, 1),1)];
+     myVarsCounter = myVarsCounter+1;
+ 
+@@ -154,15 +145,15 @@ end
+ 
+ % + -
+ 
+-while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
+-    tmp = regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens');
+-    [start, endd] = regexp(tempf,'(\w+)(\+|-)(\w+)');
++while(size(regexp(tempf,'(\w+\.?\w*)(\+|-)(\w+\.?\w*)', 'tokens'))~= 0)
++    tmp = regexp(tempf,'(\w+\.?\w*)(\+|-)(\w+\.?\w*)', 'tokens');
++    [start, endd] = regexp(tempf,'(\w+\.?\w*)(\+|-)(\w+\.?\w*)');
+     tmp=tmp{1};
+     tmpfirst = tmp{1};
+     op = tmp{2};
+     tmpsec = tmp{3};
+     if(size(str2num(tmpfirst))== 0)
+-        [tmpval1, tmpRelError1, tmpAbsError1] = findVarPar(tmpfirst, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn);
++        [tmpval1, tmpRelError1, tmpAbsError1] = findVarPar(tmpfirst, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn, ischop);
+     else
+         tmpval1 = str2num(tmpfirst);
+         tmpRelError1 = 0;
+@@ -170,14 +161,16 @@ while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
+     end
+     
+     if(size(str2num(tmpsec))== 0)
+-        [tmpval2, tmpRelError2, tmpAbsError2] = findVarPar(tmpsec, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn);
++%         TODO
++        [tmpval2, tmpRelError2, tmpAbsError2] = findVarPar(tmpsec, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn, ischop);
+     else
+         tmpval2 = str2num(tmpsec);
+         tmpRelError2 = 0;
+         tmpAbsError2 = 0;
+     end
+     if(op == '+')
+-        [tempRelError, tempAbsError, tempAns] = calcSum(tmpRelError1, tmpAbsError1, tmpval1, tmpRelError2, tmpAbsError2, tmpval2);
++%         TODO
++        [tempRelError, tempAbsError, tempAns] = calcSum(tmpRelError1, tmpAbsError1, tmpval1, tmpRelError2, tmpAbsError2, tmpval2, ischop);
+     else
+         [tempRelError, tempAbsError, tempAns] = calcSub(tmpRelError1, tmpAbsError1, tmpval1, tmpRelError2, tmpAbsError2, tmpval2);
+     end
+@@ -185,15 +178,17 @@ while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
+     myVarsArrPars = [myVarsArrPars;start(1),endd(1),tempRelError,tempAbsError,tempAns];
+     myVarsCounter = myVarsCounter+1;
+     
++%     TODO
+     if(isa(tmpval1, 'sym'))
+-        tmpval1 = char(tmpval1);
++        tmpval1 = char(vpa(tmpval1, FPD));
+     else
+-        tmpval1 = num2str(double(tmpval1));
++%         TODO convert to char
++        tmpval1 = char(vpa(tmpval1, FPD));
+     end
+     if(isa(tmpval2, 'sym'))
+-        tmpval2 = char(tmpval2);
++        tmpval2 = char(vpa(tmpval2, FPD));
+     else
+-        tmpval2 = num2str(tmpval2);
++        tmpval2 = char(vpa(tmpval2, FPD));
+     end
+     
+     if(op == '+')
+@@ -202,9 +197,9 @@ while(size(regexp(tempf,'(\w+)(\+|-)(\w+)', 'tokens'))~= 0)
+         tmp = [tmpval1, '-', tmpval2];
+     end
+     mySteps = [mySteps; tmp]; 
+-	myrelError = [myrelError;tempRelError];
+-    myAbsError = [myAbsError;tempAbsError];
+-    myval = [myval;tempAns];
++	myrelError = [myrelError;vpa(tempRelError, FPD)];
++    myAbsError = [myAbsError;vpa(tempAbsError, FPD)];
++    myval = [myval;vpa(tempAns, FPD)];
+ end
+ 
+ 
+diff --git a/Codes/logic/chapter1/calcExp.m b/Codes/logic/chapter1/calcExp.m
+index cf918e7..481eae0 100644
+--- a/Codes/logic/chapter1/calcExp.m
++++ b/Codes/logic/chapter1/calcExp.m
+@@ -1,10 +1,20 @@
+ function [fRelError, fAbsError, fAns] = calcExp(RelError1, AbsError1, Val1, RelError2, AbsError2, Val2)
+ syms a b c d e f
+ syms e(a) e(b) e(c) e(d) e(e) e(f)
+-fRelError = 0;
++
++fAns = subs(Val1^Val2);
++fRelError = subs(0);
++fAbsError = subs(0);
++if (AbsError1 == 0)
++    if (AbsError1 == 0)
++        return;
++    end
++end
++
++% Val1
++% Val2
+ for i = 1:Val2
+     fRelError = subs(fRelError+RelError1);
+ end
+-fAns = Val1^Val2;
+ fAbsError = subs(abs(fRelError*fAns));
+ end
+\ No newline at end of file
+diff --git a/Codes/logic/chapter1/calcSum.m b/Codes/logic/chapter1/calcSum.m
+index 94d71ad..984f2f5 100644
+--- a/Codes/logic/chapter1/calcSum.m
++++ b/Codes/logic/chapter1/calcSum.m
+@@ -1,8 +1,18 @@
+-function [fRelError, fAbsError, fAns] = calcSum(RelError1, AbsError1, Val1, RelError2, AbsError2, Val2, parametricVars)
++function [fRelError, fAbsError, fAns] = calcSum(RelError1, AbsError1, Val1, RelError2, AbsError2, Val2, ischop, parametricVars)
+ % TODO
+ syms a b c d e f
+ syms e(a) e(b) e(c) e(d) e(e) e(f)
+ fAbsError = subs(AbsError1 + AbsError2);
+ fAns = subs(Val1+Val2);
+ fRelError = subs(fAbsError/fAns);
++% TODO
++if(ischop==1)
++    fAbsError = subs(floor(subs(fAbsError*10))/10)
++    fAns = subs(floor(subs(fAns*10))/10)
++    fRelError = subs(floor(subs(fRelError*10))/10)
++    
++end
++vpa(fAbsError, 2)
++vpa(fAns, 2)
++vpa(fRelError, 2)
+ end
+\ No newline at end of file
+diff --git a/Codes/logic/chapter1/findVarPar.m b/Codes/logic/chapter1/findVarPar.m
+index f4a116f..d3a6a71 100644
+--- a/Codes/logic/chapter1/findVarPar.m
++++ b/Codes/logic/chapter1/findVarPar.m
+@@ -1,4 +1,4 @@
+-function [val, relError, AbsError ] = findVarPar(name, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn)
++function [val, relError, AbsError ] = findVarPar(name, myVarsCounter, myVarsArrPars, vars, varsValues, absuluteIn, ischop)
+ AbsError = -1;
+ % name
+ % varsValues
+@@ -12,7 +12,7 @@ for i = 1:size(varsValues, 1)
+     end
+ end
+ if(size(regexp(name,'a\d+a', 'tokens'))~= 0)
+-    index = str2double(name(2:size(name, 2)-1));
++    index = (name(2:size(name, 2)-1));
+ %     name
+     val = myVarsArrPars(index, 5);
+     relError = myVarsArrPars(index, 3);
+@@ -24,4 +24,14 @@ if(AbsError == -1)
+     AbsError = sym(['e(',name,')']);
+     relError = sym(['e(',name,')/',name]);
+ end
++
++if(ischop==1)
++    val = subs(floor(subs(val*10))/10)
++    relError = subs(floor(subs(relError*10))/10)
++    AbsError = subs(floor(subs(AbsError*10))/10)
++    
++end
++vpa(val, 2)
++vpa(relError, 2)
++vpa(AbsError, 2)
+ end
+\ No newline at end of file

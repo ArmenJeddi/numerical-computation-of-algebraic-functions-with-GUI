@@ -150,7 +150,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
   end
   [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars);
   
-%  class(num(val(size(val, 1))))
  set(handles.Answer, 'String', char((val(size(val, 1)))));
   
 h = uimulticollist (gcf);
