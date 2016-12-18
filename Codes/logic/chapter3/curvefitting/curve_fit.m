@@ -1,5 +1,5 @@
-function [ output] = curve_fit( X , Y , choice )
-
+function [ output] = curve_fit( X , Y , choice , FPD )
+    syms x ;
     n = size(X)  ;
     S_x_1 = sum(X) ;
     S_x_2 = sum(X .^ 2) ;
@@ -108,8 +108,23 @@ function [ output] = curve_fit( X , Y , choice )
             output = strcat(num2str(alpha) , '*exp(' , num2str(A(2)) , '*x)') ;
             
     end
+	
+	
+	
+    l = ceil((X(n)-X(1))/0.01);
+    xs = zeros(1,l(1,2));
+    xs(1)=X(1);
+    i=2;
+    while(i<=length(xs))
+        xs(i)=xs(i-1)+0.01;
+        i=i+1;
+    end
     
-   output = sym(output) ;
+    output = sym(output) ;
+    output = simplify(output);
+    output = vpa(output , FPD );
+    ys = subs(output,x,xs);
+    plot(xs,ys,'g');
     
 end
 

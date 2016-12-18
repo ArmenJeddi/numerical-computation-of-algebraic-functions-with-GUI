@@ -1,5 +1,6 @@
 function [ output ] = interpolate( X , Y , type , FPD)
     syms x ;
+    output = x ;
     n = size(X) ;
     switch(type)
         case 0  %LAGRANGE
@@ -16,8 +17,8 @@ function [ output ] = interpolate( X , Y , type , FPD)
             output = NewtonCentral_Forward(X,Y) ;
     end
     
-    l=ceil((X(n)-X(1))/0.01);
-    xs=zeros(1,l);
+    l = ceil((X(n)-X(1))/0.01);
+    xs = zeros(1,l(1,2));
     xs(1)=X(1);
     i=2;
     while(i<=length(xs))
@@ -25,9 +26,8 @@ function [ output ] = interpolate( X , Y , type , FPD)
         i=i+1;
     end
     
-    
-    output = simplify(output);
     output = sym(output) ;
+    output = simplify(output);
     output = vpa(output , FPD );
     ys = subs(output,x,xs);
     plot(xs,ys,'g');
