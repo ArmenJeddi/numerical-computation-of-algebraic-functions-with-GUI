@@ -22,7 +22,7 @@ function varargout = ch3(varargin)
 
 % Edit the above text to modify the response to help ch3
 
-% Last Modified by GUIDE v2.5 08-Dec-2016 19:04:57
+% Last Modified by GUIDE v2.5 18-Dec-2016 19:02:15
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,8 +60,8 @@ handles.action = 'interpolate' ;
 handles.numofpoints = 2 ;
 handles.act_type = 1 ;
 
-addpath(genpath('Codes/logic/chapter3/interpolation'));
-addpath(genpath('Codes/logic/chapter3/curvefitting'));
+addpath('interpolation');
+addpath('curvefitting') ;
 
 % Update handles structure
 guidata(hObject, handles);
@@ -966,10 +966,58 @@ function x_button_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 func = get(handles.result , 'String') ;
 y = str2double(get(handles.x_enter , 'String' )) ;
-disp(y) ;
 mag = char(calc(func, y )) ;
 handles.result_is.Visible = 'On' ;
 handles.result_is.String = mag ;
+guidata(hObject, handles);
 
 
+
+function myfunc_Callback(hObject, eventdata, handles)
+% hObject    handle to myfunc (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+input = get(hObject,'String');
+
+if(isempty(input) )
+    errordlg('You must enter a function here','Input required','modal')
+    uicontrol(hObject)
+    return
+end
+guidata(hObject, handles);
+
+% Hints: get(hObject,'String') returns contents of myfunc as text
+%        str2double(get(hObject,'String')) returns contents of myfunc as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function myfunc_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to myfunc (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in myfuncbutton.
+function myfuncbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to myfuncbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+for i = 1:10
+    if i <= handles.numofpoints
+        func = get(handles.myfunc , 'String') ;
+        y = str2double(get(findobj( 'Tag', strjoin({'x', int2str(i)},'')) , 'String' )) ;
+        
+        mag = char(calc(func, y )) ;
+        set(findobj( 'Tag', strjoin({'x', int2str(i)},'') ) , 'String', num2str(i));
+        set(findobj( 'Tag', strjoin({'y', int2str(i)},'') ) , 'String', mag);
+    end
+end
+  
 guidata(hObject, handles);
