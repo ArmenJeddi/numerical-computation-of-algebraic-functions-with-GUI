@@ -1,3 +1,5 @@
+% close(gcf);
+% set(handles.parent, 'Visible', 'on');
 function varargout = untitled(varargin)
 % UNTITLED MATLAB code for untitled.fig
 %      UNTITLED, by itself, creates a new UNTITLED or raises the existing
@@ -54,7 +56,8 @@ function untitled_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for untitled
 handles.output = hObject;
-
+handles.FPD = varargin{1}.newVar1;
+handles.parent = varargin{1}.thisWin;
 % Update handles structure
 guidata(hObject, handles);
 
@@ -148,7 +151,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
       absuluteIn = [absuluteIn;str2num(get(handles.fErrText, 'String'))];
   catch
   end
-  [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars);
+  [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars, 0, handles.FPD);
   
  set(handles.Answer, 'String', char((val(size(val, 1)))));
   

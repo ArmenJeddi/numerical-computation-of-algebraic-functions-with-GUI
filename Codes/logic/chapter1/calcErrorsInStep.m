@@ -1,5 +1,4 @@
-function [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars)
-FPD = 2;
+function [steps, relError, AbsError, val] = calcErrorsInStep(f, vars, varsValues,absuluteIn, parametricVars, ischop, FPD)
 digits(FPD);
 ischop = 0;
 myVarsSymbol = @(i) ['a',num2str(i),'a'];
@@ -23,7 +22,7 @@ for i = size(startIndex, 1):-1:1
     newf = tempf(startIndex(i): endIndex(i));
     tempf=[tempf(1:startIndex(i) - 1), myVarsSymbol(myVarsCounter), tempf(endIndex(i)+1:size(tempf, 2))];
     newf = newf(2:size(newf, 2)-1);
-    [tmpinnerSteps, tmpinneRrelErrors, tmpinneAbsErrors, tmpinnerVals] = calcErrorsInStep(newf, vars, varsValues,absuluteIn, parametricVars);
+    [tmpinnerSteps, tmpinneRrelErrors, tmpinneAbsErrors, tmpinnerVals] = calcErrorsInStep(newf, vars, varsValues,absuluteIn, parametricVars, 0, FPD);
     innerSteps = [tmpinnerSteps;innerSteps];
     inneRrelErrors = [tmpinneRrelErrors;inneRrelErrors];
     inneAbsErrors =[tmpinneAbsErrors;inneAbsErrors];
