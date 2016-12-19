@@ -2,7 +2,7 @@ function varargout = ch2menu(varargin)
 % CH2MENU MATLAB code for ch2menu.fig
 %      CH2MENU, by itself, creates a new CH2MENU or raises the existing
 %      singleton*.
-%
+%       
 %      H = CH2MENU returns the handle to a new CH2MENU or the handle to
 %      the existing singleton*.
 %
@@ -22,7 +22,7 @@ function varargout = ch2menu(varargin)
 
 % Edit the above text to modify the response to help ch2menu
 
-% Last Modified by GUIDE v2.5 08-Dec-2016 19:41:55
+% Last Modified by GUIDE v2.5 17-Dec-2016 12:59:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -91,10 +91,18 @@ function ch2menu2ndPB_Callback(hObject, eventdata, handles)
 % hObject    handle to ch2menu2ndPB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+input = str2double(get(handles.ch2eqsNum, 'String'));
+if isnan(input) || ~isreal(input) || mod(input, 1) || input < 2
+    errordlg('You must enter an integer value greater than 1','Invalid Input','modal')
+    uicontrol(hObject)
+    return
+else
+    handles.numberOfEqns = input;
+    handles.thisWin = gcf;
+    set(gcf , 'Visible' , 'off');
+    secondOptionPanel(handles);
+end
 
-handles.thisWin = gcf ;
-set(gcf , 'Visible' , 'off') ;
-secondOptionPanel(handles);
 
 % --- Executes on button press in ch2menuBackPB.
 function ch2menuBackPB_Callback(hObject, eventdata, handles)
@@ -102,5 +110,28 @@ function ch2menuBackPB_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-close(gcf) ;
+close(gcf);
 set(handles.parent , 'Visible' , 'on');
+
+
+
+function ch2eqsNum_Callback(hObject, eventdata, handles)
+% hObject    handle to ch2eqsNum (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of ch2eqsNum as text
+%        str2double(get(hObject,'String')) returns contents of ch2eqsNum as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function ch2eqsNum_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ch2eqsNum (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

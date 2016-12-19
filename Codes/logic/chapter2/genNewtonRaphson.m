@@ -1,14 +1,15 @@
-function [res] = genNewtonRaphson(equations_strs, n, intervals, iter)
+function [pts, steps] = genNewtonRaphson(equations_strs, n, intervals, iter, FPD)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
+digits(FPD);
 vars = sym('a%d', [1 n]);
 equations = subs(equations_strs);
 
 % generating initial points
 initial_points = zeros(1, n);
 for i=1:n,
-    initial_points(i) = (intervals(i, 1)+intervals(i, 2))/2;
+    initial_points(i) = vpa((intervals(i, 1)+intervals(i, 2))/2);
 end
 
 D_mat = sym(zeros(n, n));
@@ -36,15 +37,23 @@ end
 
 
 points = zeros(iter+1, n);
-points(1, :) = initial_points;
+points(1, :) = vpa(initial_points);
 for i=1:iter,
-    tmpD = eval(subs(D, vars, points(i, :)));
+    tmpD = vpa(eval(subs(D, vars, points(i, :))));
     for j=1:n,
-        tmpDj = eval(subs(Ds(j), vars, points(i, :)));
-        points(i+1, j) = points(i, j) + tmpDj/tmpD;
+        tmpDj = vpa(eval(subs(Ds(j), vars, points(i, :))));
+        points(i+1, j) = vpa(points(i, j)) + vpa(tmpDj/tmpD);
     end
 end
 
-% disp(points); % test
-res = points;
+pts = vpa(points);
+
+steps = cell(iter+1, 1);
+for i=1:iter+1
+    steps{i} = ['step ', num2str(i-1), ' -> '];
+    for j=1:n
+        steps{i} = [steps{i}, char(pts(i, j)), '  '];
+    end
+end
+
 end

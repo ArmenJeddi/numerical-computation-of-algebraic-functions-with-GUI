@@ -22,7 +22,7 @@ function varargout = firstOptionPanel(varargin)
 
 % Edit the above text to modify the response to help firstOptionPanel
 
-% Last Modified by GUIDE v2.5 08-Dec-2016 17:17:26
+% Last Modified by GUIDE v2.5 17-Dec-2016 22:24:36
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,6 +56,7 @@ function firstOptionPanel_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 handles.parent = varargin{1}.thisWin ;
+handles.FPD = varargin{1}.FPD;
 % Update handles structure
 guidata(hObject, handles);
 
@@ -79,7 +80,6 @@ function ch2firstBackPB_Callback(hObject, eventdata, handles)
 % hObject    handle to ch2firstBackPB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 close(gcf) ;
 set(handles.parent , 'Visible' , 'on');
 
@@ -88,30 +88,30 @@ function ch2firstSolvePB_Callback(hObject, eventdata, handles)
 % hObject    handle to ch2firstSolvePB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+FPD = handles.FPD;
 inp_eq = get(handles.ch2firstEq, 'String');
 inp_iter = str2num(get(handles.ch2firstIter, 'String'));
 inp_intvl = [str2num(get(handles.m1to3intvlStart, 'String')), ...
     str2num(get(handles.m1to3intvlEnd, 'String'))];
 inp_initpoint = str2num(get(handles.m4and5initialPoint, 'String'));
 
-disp(inp_eq);% test
-disp(inp_iter); %test
+% disp(inp_eq);% test
+% disp(inp_iter); %test
 
 if get(handles.bisectionRadio, 'Value') == 1,
-    [out_steps, out_res] = bisection(inp_eq, inp_intvl, inp_iter);
+    [out_steps, out_res] = bisection(inp_eq, inp_intvl, inp_iter, FPD);
 elseif get(handles.secantRadio, 'Value') == 1,
-    [out_steps, out_res] = secant(inp_eq, inp_intvl, inp_iter);
+    [out_steps, out_res] = secant(inp_eq, inp_intvl, inp_iter, FPD);
 elseif get(handles.falsePosRadio, 'Value') == 1,
-    [out_steps, out_res] = falsePosition(inp_eq, inp_intvl, inp_iter);
+    [out_steps, out_res] = falsePosition(inp_eq, inp_intvl, inp_iter, FPD);
 elseif get(handles.nrRadio, 'Value') == 1,
-    [out_steps, out_res] = newtonRaphson(inp_eq, inp_initpoint, inp_iter);
+    [out_steps, out_res] = newtonRaphson(inp_eq, inp_initpoint, inp_iter, FPD);
 else
-    [out_steps, out_res] = fixedPoint(inp_eq, inp_initpoint, inp_iter);
+    [out_steps, out_res] = fixedPoint(inp_eq, inp_initpoint, inp_iter, FPD);
 end
 
 set(handles.ch2firstStepsLB, 'String', out_steps);
-set(handles.ch2firstFinalRes, 'String', num2str(out_res));
+set(handles.ch2firstFinalRes, 'String', char(out_res));
 
 axes(handles.ch2firstAxes);
 ezplot(subs(inp_eq));
@@ -277,14 +277,14 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in ch2hideGraphCB.
-function ch2hideGraphCB_Callback(hObject, eventdata, handles)
-% hObject    handle to ch2hideGraphCB (see GCBO)
+% --- Executes on button press in ch2firstHideGraphCB.
+function ch2firstHideGraphCB_Callback(hObject, eventdata, handles)
+% hObject    handle to ch2firstHideGraphCB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of ch2hideGraphCB
-if get(handles.ch2hideGraphCB, 'Value') == 0,
+% Hint: get(hObject,'Value') returns toggle state of ch2firstHideGraphCB
+if get(handles.ch2firstHideGraphCB, 'Value') == 0,
     set(handles.ch2firstAxes, 'Visible', 'on');
     ch2axes1 = get(handles.ch2firstAxes, 'children');
     set(ch2axes1, 'Visible', 'on');
@@ -295,14 +295,14 @@ else
     set(handles.ch2firstAxes, 'Visible', 'off');
 end
 
-% --- Executes on button press in ch2hideStepsCB.
-function ch2hideStepsCB_Callback(hObject, eventdata, handles)
-% hObject    handle to ch2hideStepsCB (see GCBO)
+% --- Executes on button press in ch2fristHideStepsCB.
+function ch2fristHideStepsCB_Callback(hObject, eventdata, handles)
+% hObject    handle to ch2fristHideStepsCB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of ch2hideStepsCB
-if get(handles.ch2hideStepsCB, 'Value') == 0,
+% Hint: get(hObject,'Value') returns toggle state of ch2fristHideStepsCB
+if get(handles.ch2fristHideStepsCB, 'Value') == 0,
     set(handles.ch2firstStepsLB, 'Visible', 'on');
 else
     set(handles.ch2firstStepsLB, 'Visible', 'off');
