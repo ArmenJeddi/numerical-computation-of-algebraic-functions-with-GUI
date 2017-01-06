@@ -1,4 +1,5 @@
 function [steps, anss] = Euler(f, y0, x0, n, h)
+   
     syms x y;
     out = cell(n+1, 1);
     steps = cell(n+1, 1);

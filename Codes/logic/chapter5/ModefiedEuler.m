@@ -4,7 +4,6 @@ function [steps, anss] = ModefiedEuler(f, y0, x0, n, h)
     f = @(xTmp, yTmp) vpa(subs(f, [x, y], [xTmp yTmp]));
     out = cell(2*n+1, 1);
     steps = cell(2*n+1, 1);
-    n
     
     xTmp = vpa(x0);
     yTmp = vpa(y0);

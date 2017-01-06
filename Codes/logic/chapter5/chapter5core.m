@@ -10,9 +10,10 @@ function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode, FPD)
         case 3
             [steps, anss] = ModefiedEuler(f, y0, x0, n, h);
         case 4
-            Runge_kutta_mid_point
+%             Runge_kutta_mid_point
+            [steps, anss] = ModefiedEuler(f, y0, x0, n, h);
         case 5
-            Runge_kutta_3order
+            [steps, anss] = Runge_kutta_3order(f, y0, x0, n, h);
         case 6
             Runge_kutta_4order
         case 7
