@@ -1,13 +1,13 @@
-function [ output_args ] = chapter5core( f, y0, x0, h, xn,mode)
+function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode)
     n = (xn - x0)/h;
     switch mode
         
         case 1
             Taylor
         case 2
-            out = Euler(f, y0, x0, n, h)
+            [steps, anss] = Euler(f, y0, x0, n, h);
         case 3
-            ModefiedEuler
+            [steps, anss] = ModefiedEuler(f, y0, x0, n, h);
         case 4
             Runge_kutta_mid_point
         case 5
