@@ -15,7 +15,7 @@ function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode, FPD)
         case 5
             [steps, anss] = Runge_kutta_3order(f, y0, x0, n, h);
         case 6
-            Runge_kutta_4order
+            [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h);
         case 7
             Adams_moulton
         case 8
