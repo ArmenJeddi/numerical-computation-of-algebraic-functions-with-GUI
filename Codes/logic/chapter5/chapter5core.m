@@ -17,10 +17,12 @@ function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode, FPD)
         case 6
             [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h);
         case 7
-            Adams_moulton
+            [steps, anss] = Adams_moulton_3order(f, y0, x0, n, h);
         case 8
-            Euler_2nd
+            [steps, anss] = Adams_moulton(f, y0, x0, n, h);
         case 9
+            Euler_2nd
+        case 10
             Runge_kutta_2nd_4order
         
         

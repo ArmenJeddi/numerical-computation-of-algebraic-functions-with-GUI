@@ -10,8 +10,6 @@ function [steps, anss] = Euler(f, y0, x0, n, h)
         out{i+1} = vpa(out{i}+h*subs(f, [x y], [xTmp yTmp]));
     end
     anss = out{n+1};
-%     num2str(out{1})
-%     num2str(x0+h*(2))
     for i=1:n+1
         steps{i} = ['y(', num2str(x0+h*(i-1)), ') = ', num2str(double(out{i}))];
     end
