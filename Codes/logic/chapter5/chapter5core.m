@@ -1,5 +1,6 @@
-function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode)
-    n = (xn - x0)/h;
+function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode, FPD)
+    digits(FPD);
+    n = round((xn - x0)/h);
     switch mode
         
         case 1

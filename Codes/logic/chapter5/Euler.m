@@ -1,13 +1,15 @@
 function [steps, anss] = Euler(f, y0, x0, n, h)
     syms x y;
-    out = cell(floor(n+1), 1);
-    steps = cell(floor(n+1), 1);
+    out = cell(n+1, 1);
+    steps = cell(n+1, 1);
     n
     out{1} = y0;
     for i=1:n
-        out{i+1} = out{i}+h*subs(f, [x y], [x0+h*i out{i}]);
+        xTmp = vpa(x0+h*i);
+        yTmp = vpa(out{i});
+        out{i+1} = vpa(out{i}+h*subs(f, [x y], [xTmp yTmp]));
     end
-    anss = out{i+1};
+    anss = out{n+1};
 %     num2str(out{1})
 %     num2str(x0+h*(2))
     for i=1:n+1
