@@ -1,4 +1,4 @@
-function [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h);
+function [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h)
 
     syms x y;
     func = @(xTmp, yTmp) vpa(subs(f, [x y], [xTmp yTmp]));
