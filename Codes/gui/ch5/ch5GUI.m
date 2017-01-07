@@ -326,7 +326,7 @@ end
 
 % --- Executes on button press in FirstOrderButt.
 function FirstOrderButt_Callback(hObject, eventdata, handles)
-
+try
     f = get(handles.eq, 'String');
     y0 = str2double(get(handles.y0Text, 'String'));
     x0 = str2double(get(handles.x0Text, 'String'));
@@ -350,10 +350,9 @@ function FirstOrderButt_Callback(hObject, eventdata, handles)
     set(handles.listbox, 'String', steps);
     set(handles.ansText, 'String', ['y = ' char(vpa(anss))]);
     
-% hObject    handle to FirstOrderButt (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
+catch
+    msgbox('please check the inputs','Invalid Input');
+end
 
 
 function eq1_Callback(hObject, eventdata, handles)
@@ -403,7 +402,7 @@ end
 
 % --- Executes on button press in seccOrderButt.
 function seccOrderButt_Callback(hObject, eventdata, handles)
-
+try
     f = get(handles.eq1, 'String');
     g = get(handles.eq2, 'String');
     x0 = str2double(get(handles.x0Text2, 'String'));
@@ -423,11 +422,9 @@ function seccOrderButt_Callback(hObject, eventdata, handles)
     [steps, anss] = chapter5core2Order( f, g ,x0, y0, z0, h, xn, mode, FPD);
     set(handles.listbox, 'String', steps);
     set(handles.ansText, 'String', ['y = ' char(vpa(anss{1})) '  ,z = ' char(vpa(anss{2}))]);
-% hObject    handle to seccOrderButt (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
+catch
+     msgbox('please check the inputs','Invalid Input');
+end
 
 function z0Text2_Callback(hObject, eventdata, handles)
 % hObject    handle to z0Text2 (see GCBO)
