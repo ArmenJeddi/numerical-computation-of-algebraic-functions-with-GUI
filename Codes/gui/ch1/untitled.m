@@ -100,7 +100,7 @@ end
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-
+try
   f = get(handles.funcText, 'String');
   vars = [];
   varsValues = ones(0, 1);
@@ -182,6 +182,10 @@ for i = 1:size(steps, 1)
     else
         uimulticollist(h, 'addRow', {steps{i}, char(relError(i)), char(AbsError(i)), char(val(i))}, 2, 'RED');
     end
+end
+
+catch
+    msgbox('please check the inputs','Invalid Input');
 end
 
 % uimulticollist(h, 'addRow', {'1', 'qq', 'rrr'}, 2);
