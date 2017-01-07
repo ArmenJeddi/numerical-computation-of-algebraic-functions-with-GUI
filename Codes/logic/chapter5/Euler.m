@@ -11,7 +11,7 @@ function [steps, anss] = Euler(f, y0, x0, n, h)
     end
     anss = out{n+1};
     for i=1:n+1
-        steps{i} = ['y(', num2str(x0+h*(i-1)), ') = ', num2str(double(out{i}))];
+        steps{i} = ['y(', char(vpa(x0+h*(i-1))), ') = ', char(vpa(out{i}))];
     end
     
 end

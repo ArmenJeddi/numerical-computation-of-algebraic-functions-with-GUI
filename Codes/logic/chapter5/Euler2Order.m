@@ -25,8 +25,8 @@ function [steps, anss] = Euler2Order(f, g ,x0, y0, z0, h, n)
     anss{1} = out{2*n-1};
     anss{2} = out{2*n};
     for i=0:2:2*n-2
-        steps{i+1} = ['y(', num2str(origX0+h*(i/2+1)), ') = ', num2str(double(out{i+1}))];
-        steps{i+2} = ['z(', num2str(origX0+h*(i/2+1)), ') = ', num2str(double(out{i+2}))];
+        steps{i+1} = ['y(', char(vpa(origX0+h*(i/2+1))), ') = ', char(vpa(out{i+1}))];
+        steps{i+2} = ['z(', char(vpa(origX0+h*(i/2+1))), ') = ', char(vpa(out{i+2}))];
     end
 end
 

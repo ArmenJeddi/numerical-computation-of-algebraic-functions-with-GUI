@@ -1,4 +1,4 @@
-function [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h)
+ function [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h)
 
     syms x y;
     func = @(xTmp, yTmp) vpa(subs(f, [x y], [xTmp yTmp]));
@@ -28,11 +28,11 @@ function [steps, anss] = Runge_kutta_4order(f, y0, x0, n, h)
     anss = out{5*n};
     
     for i=0:5:5*n-5
-        steps{i+1} = ['k1(', num2str(x0+h*(i/5+1)), ') = ', num2str(double(out{i+1}))];
-        steps{i+2} = ['k2(', num2str(x0+h*(i/5+1)), ') = ', num2str(double(out{i+2}))];
-        steps{i+3} = ['k3(', num2str(x0+h*(i/5+1)), ') = ', num2str(double(out{i+3}))];
-        steps{i+4} = ['k4(', num2str(x0+h*(i/5+1)), ') = ', num2str(double(out{i+4}))];
-        steps{i+5} = ['y(', num2str(x0+h*(i/5+1)), ') = ', num2str(double(out{i+5}))];
+        steps{i+1} = ['k1(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+1}))];
+        steps{i+2} = ['k2(', char((vpax0+h*(i/5+1)),) ') = ', char(vpa(out{i+2}))];
+        steps{i+3} = ['k3(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+3}))];
+        steps{i+4} = ['k4(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+4}))];
+        steps{i+5} = ['y(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+5}))];
     end
 
 end

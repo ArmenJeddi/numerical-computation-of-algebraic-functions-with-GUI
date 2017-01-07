@@ -25,10 +25,10 @@ function [steps, anss] = Runge_kutta_3order(f, y0, x0, n, h)
     anss = out{4*n};
     
     for i=0:4:4*n-4
-        steps{i+1} = ['k1(', num2str(x0+h*(i/4+1)), ') = ', num2str(double(out{i+1}))];
-        steps{i+2} = ['k2(', num2str(x0+h*(i/4+1)), ') = ', num2str(double(out{i+2}))];
-        steps{i+3} = ['k3(', num2str(x0+h*(i/4+1)), ') = ', num2str(double(out{i+3}))];
-        steps{i+4} = ['y(', num2str(x0+h*(i/4+1)), ') = ', num2str(double(out{i+4}))];
+        steps{i+1} = ['k1(', char(vpa(x0+h*(i/4+1))), ') = ', char(vpa(out{i+1}))];
+        steps{i+2} = ['k2(', char(vpa(x0+h*(i/4+1))), ') = ', char(vpa(out{i+2}))];
+        steps{i+3} = ['k3(', char(vpa(x0+h*(i/4+1))), ') = ', char(vpa(out{i+3}))];
+        steps{i+4} = ['y(', char(vpa(x0+h*(i/4+1))), ') = ', char(vpa(out{i+4}))];
     end
 
 end

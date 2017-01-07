@@ -18,10 +18,10 @@ function [steps, anss] = ModefiedEuler(f, y0, x0, n, h)
     
     anss = out{2*n+1};
     
-    steps{1} = ['y(', num2str(x0), ') = ', num2str(double(y0))];
+    steps{1} = ['y(', char(vpa((x0)), ') = ', char(vpa(y0))];
     for i=2:2:2*n
-        steps{i} = ['y*(', num2str(x0+h*(i/2)), ') = ', num2str(double(out{i}))];
-        steps{i+1} = ['y(', num2str(x0+h*(i/2)), ') = ', num2str(double(out{i+1}))];
+        steps{i} = ['y*(', char(vpa(x0+h*(i/2))), ') = ', char(vpa(out{i}))];
+        steps{i+1} = ['y(', char(vpa(x0+h*(i/2))), ') = ', char(vpa(out{i+1}))];
     end
 
 end

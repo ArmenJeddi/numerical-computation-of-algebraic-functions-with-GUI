@@ -28,9 +28,9 @@ function [steps, anss] = Taylor(f, y0, x0, n, h, nForTaylor)
     anss = out{n*(nForTaylor+1)};
     for i=1:n
         for j = 1:nForTaylor
-        steps{(i-1)*(nForTaylor+1)+j} = ['y^(', num2str(j), ') = ', num2str(double(out{(i-1)*(nForTaylor+1)+j}))];
+        steps{(i-1)*(nForTaylor+1)+j} = ['y^(', char(vpa(j)), ') = ', char(vpa(out{(i-1)*(nForTaylor+1)+j}))];
         end
-        steps{i*(nForTaylor+1)} = ['y(' ,num2str(origX0+h*(i)) ,') = ', num2str(double(out{i*(nForTaylor+1)}))];
+        steps{i*(nForTaylor+1)} = ['y(' ,char(vpa(origX0+h*(i))) ,') = ', char(vpa(out{i*(nForTaylor+1)}))];
     end
     
 
