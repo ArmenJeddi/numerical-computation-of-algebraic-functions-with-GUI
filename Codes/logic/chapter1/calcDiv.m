@@ -3,6 +3,9 @@ syms a b c d e f
 syms e(a) e(b) e(c) e(d) e(e) e(f)
 digits(FPD);
 fRelError = subs(RelError2+RelError1);
+if (Val2 == 0)
+    error('devide by zero') 
+end
 fAns = subs(Val1/Val2);
 fAbsError = subs(abs(fRelError*fAns));
 vpa(fAbsError);
