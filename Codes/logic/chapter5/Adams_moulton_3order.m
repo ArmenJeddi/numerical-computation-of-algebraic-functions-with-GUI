@@ -47,7 +47,7 @@ function [steps, anss] = Adams_moulton_3order(f, y0, x0, n, h)
         steps{i+3} = ['f2 = ', char(vpa(out{i+3}))];
         steps{i+4} = ['y* = ', char(vpa(out{i+4}))];
         steps{i+5} = ['f* = ', char(vpa(out{i+5}))];
-        steps{i+6} = ['y(', char(origX0+h*(i/6+3)), ') = ', char(vpa(out{i+6}))];
+        steps{i+6} = ['y(', char(vpa(origX0+h*(i/6+3))), ') = ', char(vpa(out{i+6}))];
     end
     
 

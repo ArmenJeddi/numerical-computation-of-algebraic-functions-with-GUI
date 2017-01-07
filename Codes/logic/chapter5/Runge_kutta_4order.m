@@ -29,7 +29,7 @@
     
     for i=0:5:5*n-5
         steps{i+1} = ['k1(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+1}))];
-        steps{i+2} = ['k2(', char((vpax0+h*(i/5+1)),) ') = ', char(vpa(out{i+2}))];
+        steps{i+2} = ['k2(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+2}))];
         steps{i+3} = ['k3(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+3}))];
         steps{i+4} = ['k4(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+4}))];
         steps{i+5} = ['y(', char(vpa(x0+h*(i/5+1))), ') = ', char(vpa(out{i+5}))];
