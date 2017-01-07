@@ -56,4 +56,6 @@ for i=1:iter+1
     end
 end
 
+disp(steps)
+
 end
