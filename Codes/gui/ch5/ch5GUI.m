@@ -98,6 +98,12 @@ end
 
 % --- Executes on button press in checkbox1.
 function checkbox1_Callback(hObject, eventdata, handles)
+    if(get(handles.checkbox1, 'Value')==1)
+        set(handles.listbox, 'Visible', 'on');
+    else
+        set(handles.listbox, 'Visible', 'off');
+    end
+        
 % hObject    handle to checkbox1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -107,6 +113,15 @@ function checkbox1_Callback(hObject, eventdata, handles)
 
 % --- Executes on selection change in popupmenu2.
 function popupmenu2_Callback(hObject, eventdata, handles)
+
+    if (get(handles.popupmenu2, 'Value') == 1)
+        set(handles.text15, 'Visible', 'off');
+        set(handles.hText2, 'Visible', 'off');
+    else
+        set(handles.text15, 'Visible', 'on');
+        set(handles.hText2, 'Visible', 'on');
+        
+    end
 % hObject    handle to popupmenu2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -130,6 +145,26 @@ end
 
 % --- Executes on selection change in popupmenu1.
 function popupmenu1_Callback(hObject, eventdata, handles)
+    
+    if (get(handles.popupmenu1, 'Value') == 1)
+        set(handles.text7, 'Visible', 'off');
+        set(handles.text8, 'Visible', 'off');
+        set(handles.hText, 'Visible', 'off');
+    else
+        set(handles.text7, 'Visible', 'on');
+        set(handles.text8, 'Visible', 'on');
+        set(handles.hText, 'Visible', 'on');
+        
+    end
+    
+    
+    if (get(handles.popupmenu1, 'Value') == 2)
+        set(handles.TaylorOrderText, 'Visible', 'on');
+    else
+        set(handles.TaylorOrderText, 'Visible', 'off');
+    end
+        
+        
 % hObject    handle to popupmenu1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
