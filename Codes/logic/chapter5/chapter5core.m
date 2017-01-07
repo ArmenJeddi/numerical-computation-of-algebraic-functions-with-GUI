@@ -1,10 +1,10 @@
-function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode, FPD)
+function [steps, anss] = chapter5core( f, y0, x0, h, xn, mode, nForTaylor, FPD)
     digits(FPD);
     n = round((xn - x0)/h);
     switch mode
         
         case 1
-            Taylor
+             [steps, anss] = Taylor(f, y0, x0, n, h, nForTaylor);
         case 2
             [steps, anss] = Euler(f, y0, x0, n, h);
         case 3
@@ -21,7 +21,7 @@ function [steps, anss] = chapter5core( f, y0, x0, h, xn,mode, FPD)
         case 8
             [steps, anss] = Adams_moulton(f, y0, x0, n, h);
         case 9
-            Euler_2nd
+            [steps, anss] = Euler_2nd(f, y0, x0, n, h);
         case 10
             Runge_kutta_2nd_4order
         
