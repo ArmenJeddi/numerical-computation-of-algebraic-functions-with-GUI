@@ -22,7 +22,7 @@ function varargout = ch5GUI(varargin)
 
 % Edit the above text to modify the response to help ch5GUI
 
-% Last Modified by GUIDE v2.5 07-Jan-2017 20:41:57
+% Last Modified by GUIDE v2.5 07-Jan-2017 22:58:55
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,9 @@ function ch5GUI_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for ch5GUI
 handles.output = hObject;
-
+handles.output = hObject;
+handles.FPD = varargin{1}.newVar1;
+handles.parent = varargin{1}.thisWin;
 % Update handles structure
 guidata(hObject, handles);
 
@@ -538,3 +540,12 @@ function x0Text2_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+    close(gcf);
+  set(handles.parent, 'Visible', 'on');
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
