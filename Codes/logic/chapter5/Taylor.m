@@ -21,10 +21,10 @@ function [steps, anss] = Taylor(f, y0, x0, n, h, nForTaylor)
         end
         out{i*(nForTaylor+1)} = sum;
         y0 = sum;
-        x0 = x0+h;
-    
+        x0 = x0+h; 
     end
-
+    
+    
     anss = out{n*(nForTaylor+1)};
     for i=1:n
         for j = 1:nForTaylor

@@ -1,4 +1,4 @@
-function [steps, anss] = chapter5core( f, y0, x0, h, xn, mode, nForTaylor, FPD)
+function [steps, anss] = chapter5core1Order( f, y0, x0, h, xn, mode, nForTaylor, FPD)
     digits(FPD);
     n = round((xn - x0)/h);
     switch mode
@@ -19,13 +19,9 @@ function [steps, anss] = chapter5core( f, y0, x0, h, xn, mode, nForTaylor, FPD)
         case 7
             [steps, anss] = Adams_moulton_3order(f, y0, x0, n, h);
         case 8
+%             TODO
             [steps, anss] = Adams_moulton(f, y0, x0, n, h);
-        case 9
-            [steps, anss] = Euler_2nd(f, y0, x0, n, h);
-        case 10
-            Runge_kutta_2nd_4order
-        
-        
+
     end
 end
 
