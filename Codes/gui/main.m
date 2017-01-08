@@ -167,7 +167,12 @@ function Chapter6_Callback(hObject, eventdata, handles)
 % hObject    handle to Chapter6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global global_struct;
 get(handles.input_Area,'String');
+handles.newVar1 = global_struct.FPD ;
+handles.thisWin = gcf ;
+set(gcf , 'Visible' , 'off') ;
+ch6(handles)
 
 
 % --- Executes on button press in Chapter5.
@@ -175,7 +180,13 @@ function Chapter5_Callback(hObject, eventdata, handles)
 % hObject    handle to Chapter5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global global_struct;
 get(handles.input_Area,'String');
+handles.newVar1 = global_struct.FPD ;
+handles.thisWin = gcf ;
+set(gcf , 'Visible' , 'off') ;
+ch5GUI(handles)
+
 
 
 % --- Executes on button press in Chapter4.
@@ -183,7 +194,13 @@ function Chapter4_Callback(hObject, eventdata, handles)
 % hObject    handle to Chapter4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global global_struct;
 get(handles.input_Area,'String');
+handles.newVar1 = global_struct.FPD ;
+handles.thisWin = gcf ;
+set(gcf , 'Visible' , 'off') ;
+ch4menu(handles)
+
 
 
 

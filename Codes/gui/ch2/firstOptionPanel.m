@@ -80,7 +80,7 @@ function ch2firstBackPB_Callback(hObject, eventdata, handles)
 % hObject    handle to ch2firstBackPB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-close(gcf) ;
+close(gcf);
 set(handles.parent , 'Visible' , 'on');
 
 % --- Executes on button press in ch2firstSolvePB.
