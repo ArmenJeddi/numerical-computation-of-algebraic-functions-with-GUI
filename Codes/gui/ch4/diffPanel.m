@@ -22,7 +22,7 @@ function varargout = diffPanel(varargin)
 
 % Edit the above text to modify the response to help diffPanel
 
-% Last Modified by GUIDE v2.5 08-Jan-2017 11:21:21
+% Last Modified by GUIDE v2.5 09-Jan-2017 22:18:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -243,3 +243,33 @@ function ch4DiffDegPopUp_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+
+function ch4DiffFResRichExtrpl_Callback(hObject, eventdata, handles)
+% hObject    handle to ch4DiffFResRichExtrpl (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of ch4DiffFResRichExtrpl as text
+%        str2double(get(hObject,'String')) returns contents of ch4DiffFResRichExtrpl as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function ch4DiffFResRichExtrpl_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ch4DiffFResRichExtrpl (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in ch4DiffResetPB.
+function ch4DiffResetPB_Callback(hObject, eventdata, handles)
+% hObject    handle to ch4DiffResetPB (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

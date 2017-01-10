@@ -176,10 +176,10 @@ function ch4IntegHideStepsCB_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of ch4IntegHideStepsCB
 
-if get(handles.ch4integStepsLB, 'Value') == 0,
-    set(handles.ch4integStepsLB, 'Visible', 'on');
+if get(hObject, 'Value') == 0,
+    set(handles.ch4IntegStepsLB, 'Visible', 'on');
 else
-    set(handles.ch4integStepsLB, 'Visible', 'off');
+    set(handles.ch4IntegStepsLB, 'Visible', 'off');
 end
 
 
@@ -257,6 +257,14 @@ function ch4IntegCalcPB_Callback(hObject, eventdata, handles)
 % hObject    handle to ch4IntegCalcPB (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+F_str = get(handles.ch4IntegFn, 'String');
+a = str2double(get(handles.ch4IntegIntvlStart, 'String'));
+b = str2double(get(handles.ch4IntegIntvlEnd, 'String'));
+
+if isnan(a) || isnan(b) || ~isreal(a) || ~isreal(b)
+    errordlg('Unvalid Endpoints! The endpoints of the interval should be real numbers!');
+end
 
 
 % --- Executes on button press in ch4IntegBackPB.
