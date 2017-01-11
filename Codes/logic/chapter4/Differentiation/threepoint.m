@@ -5,8 +5,19 @@ function [steps, res] = threepoint(F_str, pt, h, FPD)
 digits(FPD);
 steps = cell(3, 1);
 
-res = vpa((-3*eval(subs(F_str, pt))+4*eval(subs(F_str, pt+h))+...
-            -eval(subs(F_str, pt+2*h)))/(2*h));
+f = vpa(eval(subs(F_str, pt)));
+fnxt = vpa(eval(subs(F_str, pt+h)));
+fnxtnxt = vpa(eval(subs(F_str, pt+2*h)));
+
+res = vpa((-3*f+4*fnxt-fnxtnxt)/(2*h));
+
+steps{1} = 'The best method (with the lowest error) here';
+steps{2} = 'is the Threepoint method :';
+steps{4} = '';
+steps{5} = 'f''_i = (-3f_i + 4f_(i+1) - f_(i+2)) / 2h';
+steps{5} = ['      = (-3*', char(f), ' + 4*', char(fnxt), ' - ', ...
+    char(fnxtnxt), ') / ', char(vpa(2*h))];
+steps{6} = ['      = ', char(res)];
 
 end
 
