@@ -14,7 +14,7 @@ steps = cell(n+7, 1);
 
 % checking for errors in number of points
 if strcmp(type, 'one third')
-    if n == 1
+    if n <= 1
         errdlg = ['Error: Few points to calculate!', ...
             ' At least 3 points must exist.'];
         res = 0;
@@ -27,7 +27,7 @@ if strcmp(type, 'one third')
         return
     end
 else
-    if n == 1 || n == 2
+    if n <= 2
         errdlg = ['Error: Few points to calculate!', ...
             ' At least 4 points must exist.'];
         res = 0;
@@ -113,9 +113,9 @@ else
             num2str(n-3), '+3f' num2str(n-2), '+3f', num2str(n-1), ...
             '+f', num2str(n) ']'];
     elseif n == 6
-        steps{i+4} = 'Answer = (h/3)[f0+3f1+3f2+2f3+3f4+3f5+f6]';
+        steps{i+4} = 'Answer = (3h/3)[f0+3f1+3f2+2f3+3f4+3f5+f6]';
     elseif n == 3
-        steps{i+4} = 'Answer = (h/3)[f0+3f1+3f2+f3]';
+        steps{i+4} = 'Answer = (3h/3)[f0+3f1+3f2+f3]';
     end
     
     steps{i+5} = ['       = (3/8) * ', num2str(h), ' * ', char(res)];
