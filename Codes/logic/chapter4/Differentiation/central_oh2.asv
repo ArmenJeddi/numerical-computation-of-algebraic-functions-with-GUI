@@ -20,17 +20,12 @@ switch deg
         res = vpa((fn-fp)/(2*h));
         
         steps{4} = 'f''_i = (f_(i+1) - f_(i-1)) / (2*h)';
-        steps{5} = ['      = (', char(fn), ' - (', char(fp), ')) / ', ...
-            char(vpa(2*h))];
+        steps{5} = ['      = (', char(fn), ' - 2*', char(fn), ' + 2*', ...
+            char(fp), ' - (', char(fpp), ')) / ', char(vpa(2*h^3))];
         steps{6} = ['      = ', char(res)];
         
     case 2
         res = vpa((fn-2*f+fp)/(h^2));
-        
-        steps{4} = 'f''_i = (f_(i+1) - 2f_i + f_(i-1)) / (h^2)';
-        steps{5} = ['      = (', char(fn), ' -2* ', char(f), ...
-            ' + (', char(fp), ') / ', char(vpa(h^2))];
-        steps{6} = ['      = ', char(res)];
         
     case 3
         res = vpa((fnn-2*fn+2*fp-fpp)/(2*h^3));
