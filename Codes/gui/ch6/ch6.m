@@ -5935,8 +5935,10 @@ if handles.option.Value == 1
             handles.x_text.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                    char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String',char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -5956,8 +5958,10 @@ if handles.option.Value == 1
             handles.x_text.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                    char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -5970,8 +5974,10 @@ if handles.option.Value == 1
             
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(invert(j,z)) ;
+                   char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', num2str(invert(j,z)));
+                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', char2);
                end  
             end
             
@@ -5987,8 +5993,10 @@ if handles.option.Value == 1
             handles.x_text.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                    char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -6001,8 +6009,10 @@ if handles.option.Value == 1
             disp(matric) ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints+1
+                    char1 = num2str(matric(j,z)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', num2str(matric(j,z)));
+                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', char2);
                end  
             end
             
@@ -6018,8 +6028,10 @@ if handles.option.Value == 1
             handles.x_text.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                    char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -6031,8 +6043,10 @@ if handles.option.Value == 1
             handles.l_text.String = 'L' ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(L(j,z)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', num2str(L(j,z)));
+                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', char2 );
                end  
             end
             
@@ -6040,8 +6054,10 @@ if handles.option.Value == 1
             handles.u_text.String = 'U' ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(U(j,z)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'String', num2str(U(j,z)));
+                   set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'String', char2);
                end  
             end
             
@@ -6057,8 +6073,10 @@ if handles.option.Value == 1
             handles.x_text.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                    char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -6070,8 +6088,10 @@ if handles.option.Value == 1
             handles.l_text.String = 'L' ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(L(j,z)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', num2str(L(j,z)));
+                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', char2);
                end  
             end
             
@@ -6079,8 +6099,10 @@ if handles.option.Value == 1
             handles.u_text.String = 'U' ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(U(j,z)) ;
+                   char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'String', num2str(U(j,z)));
+                   set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'String', char2);
                end  
             end
             
@@ -6095,8 +6117,10 @@ if handles.option.Value == 1
             handles.x_text.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                    char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -6108,8 +6132,10 @@ if handles.option.Value == 1
             handles.l_text.String = 'L' ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(L(j,z)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', num2str(L(j,z)));
+                   set(findobj( 'Tag', strjoin({'l', int2str(j),int2str(z)},'') ) , 'String', char2 );
                end  
             end
             
@@ -6117,8 +6143,10 @@ if handles.option.Value == 1
             handles.u_text.String = 'U' ;
             for j = 1:handles.numofpoints
                for z = 1:handles.numofpoints
+                   char1 = num2str(U(j,z)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                    set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'Visible', 'On');
-                   set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'String', num2str(U(j,z)));
+                   set(findobj( 'Tag', strjoin({'u', int2str(j),int2str(z)},'') ) , 'String', char2);
                end  
             end
             
@@ -6139,8 +6167,10 @@ if handles.option.Value == 1
             handles.flash_button.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                     char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -6164,8 +6194,10 @@ if handles.option.Value == 1
             handles.flash_button.Visible = 'On' ;
             for i = 1:8
                 if i <= handles.numofpoints
+                     char1 = num2str(output(i,1)) ;
+                    char2 = char(vpa(char1 , handles.FPD)) ;
                     set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(output(i,1))); 
+                    set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2); 
                 else
                      set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
                 end
@@ -6196,12 +6228,14 @@ else
    handles.flash_button.Visible = 'On' ;
    handles.ev_text.Visible = 'On' ;
    handles.ev.Visible = 'On' ;
-   handles.ev.String = num2str(eval) ;
+   handles.ev.String = char(vpa(num2str(eval) , handles.FPD)) ;
    
    for i = 1:8
        if i <= handles.numofpoints
+            char1 = num2str(evec(i,1)) ;
+            char2 = char(vpa(char1 , handles.FPD)) ;
            set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'On'); 
-           set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', num2str(evec(i,1))); 
+           set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'String', char2 ); 
        else
            set(findobj( 'Tag', strjoin({'r', int2str(i)},'') ) , 'Visible', 'Off'); 
        end
