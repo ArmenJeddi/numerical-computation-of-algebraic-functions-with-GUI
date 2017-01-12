@@ -24,7 +24,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 08-Dec-2016 15:56:39
+% Last Modified by GUIDE v2.5 12-Jan-2017 14:20:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -231,6 +231,9 @@ switch user_response
     case 'Yes'
         close(gcf) ;
 end
+%axes(hObject) 
+%imshow('simpson1.png') 
+
 
 
 % --- Executes during object creation, after setting all properties.

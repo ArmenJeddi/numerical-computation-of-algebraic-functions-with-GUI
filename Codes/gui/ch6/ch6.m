@@ -51,9 +51,6 @@ function ch6_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to ch6 (see VARARGIN)
-[y1,f1] = audioread('veda.mp3') ;
-player1 = audioplayer(y1,f1) ;
-play(player1) ;
 
 % Choose default command line output for ch6
 handles.output = hObject;
