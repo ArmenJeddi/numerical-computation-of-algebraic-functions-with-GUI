@@ -1,4 +1,4 @@
-function [steps, res, resR] = diff_main(F_str, pt, deg, err_order, h, FPD)
+function [steps, res] = diff_main(F_str, pt, deg, err_order, h, FPD)
 %DIFF_MAIN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -27,22 +27,11 @@ switch err_order
                 res = res_c;
             end
             
-            if abs(exact_ans-res_3phalfh) < abs(exact_ans-res_chalfh)
-                reshalfh = res_3phalfh;
-            else
-                reshalfh = res_chalfh;
-            end
-            
         else
             [steps, res] = central_oh2(F_str, pt, deg, h, FPD);
-            [~, reshalfh] = central_oh2(F_str, pt, deg, h/2, FPD);
         end
         
 end
-
-[stepsR, resR] = richardson_extrapol(h, reshalfh, res, err_order, FPD);
-
-steps = [steps; stepsR];
 
 
 end

@@ -164,12 +164,6 @@ end
 
 h = str2double(get(handles.ch4DiffH, 'String'));
 
-[steps, res, resR] = diff_main(F_str, pt, deg, err_or, h, handles.FPD);
-
-set(handles.ch4DiffStepsLB, 'String', steps);
-set(handles.ch4DiffFRes, 'String', char(res));
-set(handles.ch4DiffFResRichExtrpl, 'String', char(resR));
-
 
 function ch4DiffPt_Callback(hObject, eventdata, handles)
 % hObject    handle to ch4DiffPt (see GCBO)
