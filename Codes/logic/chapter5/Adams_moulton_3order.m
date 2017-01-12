@@ -1,14 +1,14 @@
 function [steps, anss] = Adams_moulton_3order(f, y0, x0, n, h)
 
     syms x y;
-    func = @(xTmp, yTmp) vpa(subs(f, [x y], [xTmp yTmp]));
+    func = @(xTmp, yTmp) GRounder(subs(f, [x y], [xTmp yTmp]));
     out = cell(6*n, 1);
     steps = cell(6*n-12, 1);
     
-    x1=vpa(x0+h);
+    x1=GRounder(x0+h);
     [tmp, y1]= Runge_kutta_4order(f, y0, x0, 1, h);
     
-    x2=vpa(x1+h);
+    x2=GRounder(x1+h);
     [tmp, y2]= Runge_kutta_4order(f, y0, x0, 2, h);
     
     origX0=x0;
@@ -42,12 +42,12 @@ function [steps, anss] = Adams_moulton_3order(f, y0, x0, n, h)
     
     anss = out{6*n-12};
     for i=0:6:6*n-18
-        steps{i+1} = ['f0 = ', char(vpa(out{i+1}))];
-        steps{i+2} = ['f1 = ', char(vpa(out{i+2}))];
-        steps{i+3} = ['f2 = ', char(vpa(out{i+3}))];
-        steps{i+4} = ['y* = ', char(vpa(out{i+4}))];
-        steps{i+5} = ['f* = ', char(vpa(out{i+5}))];
-        steps{i+6} = ['y(', char(vpa(origX0+h*(i/6+3))), ') = ', char(vpa(out{i+6}))];
+        steps{i+1} = ['f0 = ', char(GRounder(out{i+1}))];
+        steps{i+2} = ['f1 = ', char(GRounder(out{i+2}))];
+        steps{i+3} = ['f2 = ', char(GRounder(out{i+3}))];
+        steps{i+4} = ['y* = ', char(GRounder(out{i+4}))];
+        steps{i+5} = ['f* = ', char(GRounder(out{i+5}))];
+        steps{i+6} = ['y(', char(GRounder(origX0+h*(i/6+3))), ') = ', char(GRounder(out{i+6}))];
     end
     
 

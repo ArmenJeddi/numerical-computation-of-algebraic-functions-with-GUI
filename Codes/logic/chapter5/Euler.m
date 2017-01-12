@@ -5,13 +5,13 @@ function [steps, anss] = Euler(f, y0, x0, n, h)
     steps = cell(n+1, 1);
     out{1} = y0;
     for i=1:n
-        xTmp = vpa(x0+h*i);
-        yTmp = vpa(out{i});
-        out{i+1} = vpa(out{i}+h*subs(f, [x y], [xTmp yTmp]));
+        xTmp = GRounder(x0+h*i);
+        yTmp = GRounder(out{i});
+        out{i+1} = GRounder(out{i}+h*subs(f, [x y], [xTmp yTmp]));
     end
     anss = out{n+1};
     for i=1:n+1
-        steps{i} = ['y(', char(vpa(x0+h*(i-1))), ') = ', char(vpa(out{i}))];
+        steps{i} = ['y(', char(GRounder(x0+h*(i-1))), ') = ', char(GRounder(out{i}))];
     end
     
 end
