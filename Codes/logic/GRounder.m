@@ -1,7 +1,11 @@
 function out = GRounder(in)
 
  global FPD;
- num = FPD + floor(log(in)/log(10))+1;
+ if (abs(in)<1)
+     num = FPD;
+ else
+     num = FPD + floor(log(abs(in))/log(10))+1;
+ end
  digits(num);
  tmp = in*(10^(FPD+1));
  tmp = floor(tmp);
