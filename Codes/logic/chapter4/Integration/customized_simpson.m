@@ -33,7 +33,7 @@ else
     
     intvl2 = [e-3*h, e];
     [steps2, res2, errdlg2] = ...
-        simpson('third eighths', F_str, intvl2, h, FPD);
+        simpson('three eighths', F_str, intvl2, h, FPD);
     
     steps = [steps; 'Assigning interval [', num2str(e-3*h), ', ', ...
         num2str(e), '] to Simpson 3/8 method.';
@@ -46,7 +46,11 @@ else
         '             = ', char(res)];
     
     steps = [steps; steps3];
-    errdlg = [errdlg1; errdlg2];
+    if strcmp(errdlg1, 'none') && strcmp(errdlg2, 'none')
+        errdlg = 'none';
+    else
+        errdlg = [errdlg1, errdlg2];
+    end
 end
 
 end

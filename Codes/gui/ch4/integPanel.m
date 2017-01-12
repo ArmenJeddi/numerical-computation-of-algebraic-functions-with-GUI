@@ -262,10 +262,63 @@ F_str = get(handles.ch4IntegFn, 'String');
 a = str2double(get(handles.ch4IntegIntvlStart, 'String'));
 b = str2double(get(handles.ch4IntegIntvlEnd, 'String'));
 
-if isnan(a) || isnan(b) || ~isreal(a) || ~isreal(b)
-    errordlg('Unvalid Endpoints! The endpoints of the interval should be real numbers!');
+if strcmp(F_str, '')
+    errordlg('You should enter the function!');
+    return
 end
 
+if isnan(a) || isnan(b) || ~isreal(a) || ~isreal(b)
+    errordlg('Unvalid Endpoints! The endpoints of the interval should be real numbers!');
+    return
+end
+
+intvl = [a, b];
+
+if get(handles.ch4IntegRombRB, 'Value') == 1
+    [steps, res] = romberg(F_str, intvl, handles.FPD);
+    
+elseif get(handles.ch4IntegGLRB, 'Value') == 1
+    n = str2double(get(handles.ch4IntegN, 'String'));
+    if isnan(n) || ~isreal(n) || n < 0 || (floor(n) ~= n)
+        errordlg('n should be a non-negative integer!');
+    return
+    end
+    [steps, res] = gauss_legendre(F_str, intvl, n, handles.FPD);
+    
+else
+    h = str2double(get(handles.ch4IntegH, 'String'));
+    if isnan(h) || ~isreal(h) || h <= 0
+        errordlg('h should be a positive real number!');
+    return
+    end
+    
+    errdlg = 'none';
+    
+    if get(handles.ch4IntegTrpzRB, 'Value') == 1
+        [steps, res] = trapezoidal(F_str, intvl, h, handles.FPD);
+        
+    elseif get(handles.ch4IntegSimp13RB, 'Value') == 1
+        [steps, res, errdlg] = ...
+            simpson('one third', F_str, intvl, h, handles.FPD);
+        
+    elseif get(handles.ch4IntegSimp38RB, 'Value') == 1
+        [steps, res, errdlg] = ...
+            simpson('three eighths', F_str, intvl, h, handles.FPD);
+        
+    else
+        [steps, res, errdlg] = ...
+            customized_simpson(F_str, intvl, h, handles.FPD);
+        
+    end
+    
+    if ~strcmp(errdlg, 'none')
+        errordlg(errdlg);
+        return
+    end
+end
+
+set(handles.ch4IntegStepsLB, 'String', steps);
+set(handles.ch4IntegFRes, 'String', char(res));
 
 % --- Executes on button press in ch4IntegBackPB.
 function ch4IntegBackPB_Callback(hObject, eventdata, handles)
