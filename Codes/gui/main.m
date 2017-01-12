@@ -115,6 +115,8 @@ else
         set(handles.Chapter4,'Enable','on');
         set(handles.Chapter5,'Enable','on');
         set(handles.Chapter6,'Enable','on');
+        global FPD
+        FPD = input;
         global_struct.FPD = input ; 
         
     end

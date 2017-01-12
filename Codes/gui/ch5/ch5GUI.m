@@ -334,7 +334,7 @@ try
     x0 = str2double(get(handles.x0Text, 'String'));
     xn = str2double(get(handles.xnText, 'String'));
     nForTaylor= 0;
-    FPD = 8;
+    FPD = handles.FPD;
     digits(FPD);
     method = get(handles.popupmenu1, 'Value');
     if (method == 1)
@@ -412,7 +412,7 @@ try
     z0 = str2double(get(handles.z0Text2, 'String'));
     xn = str2double(get(handles.xnText2, 'String'));
     method = get(handles.popupmenu2, 'Value');
-    FPD = 8;
+    FPD = handles.FPD;
     digits(FPD);
     if (method == 1)
         mode = 2;
