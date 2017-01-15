@@ -84,7 +84,7 @@ function ch4DiffHideStepsCB_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of ch4DiffHideStepsCB
 
-if get(handles.ch4DiffStepsLB, 'Value') == 0,
+if get(hObject, 'Value') == 0,
     set(handles.ch4DiffStepsLB, 'Visible', 'on');
 else
     set(handles.ch4DiffStepsLB, 'Visible', 'off');

@@ -36,7 +36,12 @@ while true
     i = i+1;
 end
 
-steps = dataTable(1:i-1, 1:j-1);
+steps = cell(i-1, j-1);
+for k=1:i-1
+    for u=1:j-1
+        steps{k, u} = char(dataTable{k, u});
+    end
+end
 res = vpa(dataTable{i-1, j-1});
 
 end

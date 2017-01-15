@@ -295,7 +295,7 @@ else
     errdlg = 'none';
     
     if get(handles.ch4IntegTrpzRB, 'Value') == 1
-        [steps, res] = trapezoidal(F_str, intvl, h, handles.FPD);
+        [steps, res] = trapezoidal(F_str, intvl, h);
         
     elseif get(handles.ch4IntegSimp13RB, 'Value') == 1
         [steps, res, errdlg] = ...

@@ -9,7 +9,7 @@ digits(FPD);
 s = intvl(1);
 e = intvl(2);
 
-n = (e-s)/h;
+n = int64((e-s)/h);
 steps = cell(n+7, 1);
 
 % checking for errors in number of points
@@ -97,11 +97,11 @@ else
         fnxtnxt = vpa(eval(subs(F_str, x+2*h)));
         res = vpa(res + fprev + 3 * (f+fnxt) + fnxtnxt);
         
-        steps{i+3} = ['f', num2str(i), ' = f(', char(x), ...
+        steps{i+3} = ['f', num2str(i), ' = f(', num2str(x), ...
             ') = ', char(f)];
-        steps{i+4} = ['f', num2str(i+1), ' = f(', char(x+h), ...
+        steps{i+4} = ['f', num2str(i+1), ' = f(', num2str(x+h), ...
             ') = ', char(fnxt)];
-        steps{i+5} = ['f', num2str(i+2), ' = f(', char(x+2*h), ...
+        steps{i+5} = ['f', num2str(i+2), ' = f(', num2str(x+2*h), ...
             ') = ', char(fnxtnxt)];
         i = i+3;
     end
