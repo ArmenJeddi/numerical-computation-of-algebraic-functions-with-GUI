@@ -28,7 +28,7 @@ end
 
 pts = vpa(solve(P_next));
 P_prime = diff(P_next);
-w = zeros(m, 1);
+w = zeros(m+3, 1);
 
 for i=1:m
     w(i) = vpa(2/((1-(pts(i))^2)*(eval(subs(P_prime, pts(i))))^2));
